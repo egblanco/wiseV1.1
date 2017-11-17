@@ -1,0 +1,220 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Validator\Constraints as WiseAssert;
+
+/**
+ * Oferta
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\OfertaRepository")
+
+ */
+class Oferta
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_inicio", type="datetime")
+     */
+    private $fechaInicio;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_fin", type="datetime")
+     */
+    private $fechaFin;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="OfertaTipo", inversedBy="oferta")
+     * @ORM\JoinColumn(name="id_tipo", referencedColumnName="id", nullable=false)
+     *
+     */
+    private $tipo;
+
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="OfertaAuto", mappedBy="oferta", cascade={"all"})
+     * @WiseAssert\IsDuplicatedOfertaAuto
+     */
+        private $ofertaAutos;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activa", type="boolean", nullable=true, options={"default" = false})
+     */
+    private $activa;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nombre", type="string", length=255)
+     */
+    private $nombre;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set fechaFin
+     *
+     * @param \DateTime $fechaFin
+     * @return Oferta
+     */
+    public function setFechaFin($fechaFin)
+    {
+        $this->fechaFin = $fechaFin;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaFin
+     *
+     * @return \DateTime 
+     */
+    public function getFechaFin()
+    {
+        return $this->fechaFin;
+    }
+
+
+    /**
+     * Set tipo
+     *
+     * @param \AppBundle\Entity\OfertaTipo $tipo
+     * @return Oferta
+     */
+    public function setTipo(\AppBundle\Entity\OfertaTipo $tipo)
+    {
+        $this->tipo = $tipo;
+
+        return $this;
+    }
+
+    /**
+     * Get tipo
+     *
+     * @return \AppBundle\Entity\OfertaTipo 
+     */
+    public function getTipo()
+    {
+        return $this->tipo;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->ofertaAutos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add ofertaAutos
+     *
+     * @param \AppBundle\Entity\OfertaAuto $ofertaAutos
+     * @return Oferta
+     */
+    public function addOfertaAuto(\AppBundle\Entity\OfertaAuto $ofertaAutos)
+    {
+        $this->ofertaAutos[] = $ofertaAutos;
+
+        $ofertaAutos->setOferta($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove ofertaAutos
+     *
+     * @param \AppBundle\Entity\OfertaAuto $ofertaAutos
+     */
+    public function removeOfertaAuto(\AppBundle\Entity\OfertaAuto $ofertaAutos)
+    {
+        $this->ofertaAutos->removeElement($ofertaAutos);
+    }
+
+    /**
+     * Get ofertaAutos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOfertaAutos()
+    {
+        return $this->ofertaAutos;
+    }
+
+    /**
+     * Set activa
+     *
+     * @param boolean $activa
+     * @return Oferta
+     */
+    public function setActiva($activa)
+    {
+        $this->activa = $activa;
+
+        return $this;
+    }
+
+    /**
+     * Get activa
+     *
+     * @return boolean 
+     */
+    public function getActiva()
+    {
+        return $this->activa;
+    }
+
+    /**
+     * Set fechaInicio
+     *
+     * @param \DateTime $fechaInicio
+     * @return Oferta
+     */
+    public function setFechaInicio($fechaInicio)
+    {
+        $this->fechaInicio = $fechaInicio;
+
+        return $this;
+    }
+
+    /**
+     * Get fechaInicio
+     *
+     * @return \DateTime 
+     */
+    public function getFechaInicio()
+    {
+        return $this->fechaInicio;
+    }
+
+    public function getAuto(){
+        if(count($this->ofertaAutos) > 0){
+            return $this->ofertaAutos[0]->getAuto();
+        }
+    }
+}

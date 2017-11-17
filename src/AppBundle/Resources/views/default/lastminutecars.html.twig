@@ -1,0 +1,115 @@
+<div class="br-own-top"></div>
+<div class="br-own"></div>
+
+<div class="row pull-left comp-car-general">
+
+    <table class="table table-bordered table-striped">
+        <ul class="list-group margin-top-list-group-comp-cars">
+            <li class="list-group-item button-component last-minute-header comp-car-general-border">
+                <div><p class="last-minute-header hover-item-header" role="button">{{ 'form.lastminute.title' |  trans }}</p></div>
+            </li>
+        </ul>
+    </table>
+    {% for oa in results %}
+        {% if oa.oferta.activa == true %}
+
+
+        <table class="table table-bordered table-striped">
+            <ul class="list-group margin-top-list-group-comp-cars">
+                <li class="list-group-item top-component comp-car-general-border">
+                    <div class="top-component-font-up">{{ 'form.lastminute.selectyour' |  trans }}</div>
+                    <div class="br-own-top"></div>
+                    <div class="top-component-font-lit">{{ 'form.lastminute.ratesare' |  trans }}
+                    </div>
+                    <div class="br-own-top"></div>
+                    <div class="top-component-font-lit">{{ 'form.lastminute.validFor' |  trans }} {{ oa.oferta.fechaInicio|date("d/m/Y") }} {{ 'form.lastminute.to' |  trans }}
+                        {{ oa.oferta.fechaFin|date("d/m/Y") }}
+                    </div>
+                </li>
+                <li class="list-group-item second-component">
+                    <div class="second-component-font">{{ oa.auto.modelo }}</div>
+                    <div class="second-component-font">$ {{ oa.precio }} USD</div>
+
+                </li>
+                <li class="list-group-item">
+                    <div><img class="img-car-show-lat" src="{{ asset('uploads/images/products/') }}{{ oa.auto.image }}"></div>
+                </li>
+                <li class="list-group-item button-component comp-car-general-border">
+                    <div><a class="button-component" role="button" href="{{ path('wizard_start',{ 'id': oa.auto.id, 'codigo': oa.oferta.codigo }) }}">{{ 'form.lastminute.select' |  trans }}</a></div>
+                </li>
+            </ul>
+        </table>
+        {% endif %}
+    {% endfor %}
+</div>
+
+{#<div class="col-md-12">#}
+    {#<div class="row well"> <div class="col-xs-8 col-sm-6 col-md-6">#}
+            {#<h2>Vertical Slider</h2>#}
+            {#<div id="myCarousel" class="vertical-slider carousel vertical slide col-md-12" data-ride="carousel">#}
+                {#<div class="row">#}
+                    {#<div class="col-md-4">#}
+                    {#<span data-slide="nextVert" class="btn-vertical-slider glyphicon glyphicon-circle-arrow-up "#}
+                          {#style="font-size: 30px"></span>#}
+                    {#</div>#}
+                    {#<div class="col-md-8">#}
+                    {#</div>#}
+                {#</div>#}
+                {#<br />#}
+                {#<!-- Carousel items -->#}
+                {#<div class="carousel-inner">#}
+                    {#<div class="item active">#}
+                        {#<div class="row">#}
+                            {#<div class="col-xs-6 col-sm-5 col-md-5">#}
+                                {#<a href="http://dotstrap.com/"> <img src="http://placehold.it/150x150" class="thumbnail"#}
+                                                                     {#alt="Image" /></a>#}
+                            {#</div>#}
+                            {#<div class="col-xs-6 col-sm-7 col-md-7">#}
+                                {#Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh#}
+                                {#euismod tincidunt ut laoreet..#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<!--/row-fluid-->#}
+                    {#</div>#}
+                    {#<!--/item-->#}
+                    {#<div class="item ">#}
+                        {#<div class="row">#}
+                            {#<div class="col-xs-6 col-sm-5 col-md-5">#}
+                                {#<a href="http://dotstrap.com/"> <img src="http://placehold.it/150x150" class="thumbnail"#}
+                                                                     {#alt="Image" /></a>#}
+                            {#</div>#}
+                            {#<div class="col-xs-6 col-sm-7 col-md-7">#}
+                                {#Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh#}
+                                {#euismod tincidunt ut laoreet..#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<!--/row-fluid-->#}
+                    {#</div>#}
+                    {#<!--/item-->#}
+                    {#<div class="item ">#}
+                        {#<div class="row">#}
+                            {#<div class="col-xs-6 col-sm-5 col-md-5">#}
+                                {#<a href="http://dotstrap.com/"> <img src="http://placehold.it/150x150" class="thumbnail"#}
+                                                                     {#alt="Image" /></a>#}
+                            {#</div>#}
+                            {#<div class="col-xs-6 col-sm-7 col-md-7">#}
+                                {#Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh#}
+                                {#euismod tincidunt ut laoreet..#}
+                            {#</div>#}
+                        {#</div>#}
+                        {#<!--/row-fluid-->#}
+                    {#</div>#}
+                    {#<!--/item-->#}
+                {#</div>#}
+                {#<div class="row">#}
+                    {#<div class="col-md-4">#}
+                    {#<span data-slide="prevVert" class="btn-vertical-slider glyphicon glyphicon-circle-arrow-down"#}
+                          {#style="color: Black; font-size: 30px"></span>#}
+                    {#</div>#}
+                    {#<div class="col-md-8">#}
+                    {#</div>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
+    {#</div>#}
+{#</div>#}
